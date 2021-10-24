@@ -6,69 +6,41 @@ IntegraES
 
 {% block content %}
 <div class="container">
-    <header>
-        <div class="primary_header">
-            <h1 class="title">HACKATON-PRODEST</h1>
-        </div>
-        <nav class="secondary_header" id="menu">
-            <ul>
-                <a href="sobre.html">
-                    <li>Sobre nós</li>
-                </a>
-                <a href="#">
-                    <li>Pesquisa</li>
-                </a>
-                <a href="#">
-                    <li>
-                        Sugestões
-                    </li>
-                </a>
-            </ul>
-        </nav>
-        <style>
-            .accordion {
-              background-color: #ccc;
-              color: #444;
-              cursor: pointer;
-              padding: 30px;
-              width: 100%;
-              border: none;
-              text-align: left;
-              outline: none;
-              font-size: 15px;
-              transition: 0.4s;
-              text-emphasis-color: white;
-            }
-            
-            .active, .accordion:hover {
-              background-color: #c86673; 
-            }
-            
-            .panel {
-              padding: 0 30px;
-              display: none;
-              background-color: #e4aab2;
-              overflow: hidden;
-            }
-            </style>
-                  
-              </header>
-              <section>
-                <h2 class="noDisplay">Main Content</h2>
-              </section>
-            <div class="row blockDisplay">
-                <div class="column_half right_half">
-                  <h2 class="column_title">ORIENTAÇÕES AO CIDADÃO</h2>
-                </div>
-                  
-                <div class="column_half right_half">
-                  <h2 class="column_title">NOVIDADES NO ESTADO</h2>
-                </div>
-              <div class="row">
-                <div class="right_article">
-            
+  <header>
+    <div class="primary_header">
+      <div class="banner">
         
-            <button class="accordion">SAÚDE</button>
+        <div class="logo"><img
+          src="https://cdn.es.gov.br/images/logo/prodest/logomarca/left/Logomarca_Prodest_100.png"/>
+        </div>
+        <h1 class="title">&nbsp;&nbsp;&nbsp;HACKATON-PRODEST&nbsp;&nbsp;&nbsp;</h1>
+      </div>  
+    </div>
+
+    <nav class="secondary_header" id="menu">
+      <ul>
+        <a href="#"><li>SOBRE NÓS</li></a>
+        <a href="#"><li>PESQUISA</li></a>
+        <a href="#"><li>SUGESTÕES</li></a>
+        <a href="http://127.0.0.1:8000/admin"><li>ADMINISTRAÇÃO</li></a>
+      </ul>
+    </nav>
+  </header>
+        
+  <div class="row blockDisplay">
+
+    <div class="column_half right_half">
+      <h2 class="column_title">ORIENTAÇÕES AO CIDADÃO</h2>
+    </div>
+      
+    <div class="column_half right_half">
+      <h2 class="column_title">NOVIDADES NO ESTADO</h2>
+    </div>
+    <div class="row">
+    <div class="right_article">
+
+
+            <button class="accordion">Saúde</button>
 
             <div class="panel">
             {%for questao in questoes%} 
@@ -78,23 +50,31 @@ IntegraES
             {% endfor %}
             </div>
 
-            <button class="accordion">PRODEST</button>
+            <button class="accordion">Prodest</button>
             <div class="panel">
                 {%for questao in questoes%} 
                 {%if questao.area_interesse.id == 2  %}
-                  <p><a href="{{link.questao.link}}" target="_blank">{{questao.descricao}}</a></p>
+                  <p><a href="{{questao.link}}" target="_blank">{{questao.descricao}}</a></p>
                 {% endif %}
                 {% endfor %}            
             </div>
 
             <button class="accordion">Casa Civil</button>
             <div class="panel">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              {%for questao in questoes%} 
+              {%if questao.area_interesse.id == 2  %}
+                <p><a href="{{questao.link}}" target="_blank">{{questao.descricao}}</a></p>
+              {% endif %}
+              {% endfor %}       
             </div>
 
             <button class="accordion">Detran</button>
             <div class="panel">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              {%for questao in questoes%} 
+              {%if questao.area_interesse.id == 3 %}
+                <p><a href="{{questao.link}}" target="_blank">{{questao.descricao}}</a></p>
+              {% endif %}
+              {% endfor %}       
             </div>
 
 
@@ -114,9 +94,19 @@ IntegraES
               });
             }
             </script>
-        
-
-
+  </div>
+  <div class="left-article">
+    {% for novidade in novidades%}
+    <h4><p class="thumbnail_align"><img src="{{novidade.imagem.url}}" style="width: 320x; height:180px ;"></p></h4>
+    <h4>{{novidade.titulo}}</h4>
+    <p>{{novidade.descricao}}</p>
+    <p><a href="{{novidade.link}}">Saiba mais</a></p>
+    {% endfor %}
+  </div>
     </header>
+    <div class="row blockDisplay"></div>
+    <footer class="secondary_header footer">
+    <div class="copyright">&copy;2021 - <strong>HACKATHON</strong> - FOCO NA CIÊNCIA</div>
+  </footer>
 </div>
 {% endblock %}

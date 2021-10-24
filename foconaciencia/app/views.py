@@ -31,6 +31,6 @@ def index(request, template_name="index.html"):
     else:
         questoes= Questao.objects.all().order_by('-id')
     
-    links = Links.objects.all()
+    novidades = Novidade.objects.all().order_by('-id')
 
-    return render(request, template_name, {'questoes': questoes,'links': links})
+    return render(request, template_name, {'questoes': questoes, 'novidades':novidades})
