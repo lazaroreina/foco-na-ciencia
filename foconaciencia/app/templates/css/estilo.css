@@ -1,0 +1,7 @@
+.container{
+    border: black;
+    background-color: crimson;
+}
+.container p{
+    font-style: yellow;
+}

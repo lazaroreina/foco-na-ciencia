@@ -22,13 +22,15 @@ class AreaInteresseForm(ModelForm):
             'descricao', 'secretaria_relacionada',
         ]
 
-def board(request, template_name="board.html"):
+def index(request, template_name="index.html"):
 
     query = request.GET.get("busca")
     if query:
         filtro = PalavrasChave.objects.filter(descricao__icontains= query)
-        questoes = Questao.objects.filter(palavraschave__in = filtro)
+        questoes = Questao.objects.filter(palavraschave__in = filtro).order_by(-id)
     else:
-        questoes= Questao.objects.all()
+        questoes= Questao.objects.all().order_by('-id')
+    
+    links = Links.objects.all()
 
-    return render(request, template_name, {'questoes': questoes})
+    return render(request, template_name, {'questoes': questoes,'links': links})
