@@ -3,6 +3,7 @@ from django.db.models.base import Model, ModelState
 from django.db.models.deletion import CASCADE
 
 
+
 # Criação de classes dos campos de bancos de dados
 
 
@@ -67,7 +68,14 @@ class Questao(models.Model):
         verbose_name_plural = "Questões"
 
 
-
+class Novidade(models.Model):
+    
+    titulo = models.CharField(max_length= 40)
+    descricao = models.CharField(max_length= 100)
+    imagem = models.ImageField()
+    links = models.ForeignKey(Links, on_delete= CASCADE)
+    def __str__(self):
+        return self.titulo
 
 
 
